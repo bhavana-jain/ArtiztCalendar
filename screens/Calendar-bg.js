@@ -27,16 +27,15 @@ class CalenderBg extends Component {
 
   render() {
     return (
-   <View style={{ alignContent: "center", justifyContent: "center", alignItems: "center", height: layout.height,
-   width: layout.width}}>
+   <View style={{ alignContent: "center", justifyContent: "center", alignItems: "center", height: layout.height,  width: layout.width}}>
    <ImageBackground source={require('../assets/images/calender-img.png')} resizeMode="contain"
-        style={{width: 170, height: 150, zIndex: 40, alignContent: "center", alignItems: "center"}}>
+        style={{width: 170, height: 150, zIndex: 40, alignContent: "center", alignItems: "center", left: 10}}>
     </ImageBackground > 
     <View style={styles.spacer}>
     <Text style={{color: "purple", fontWeight: "bold", textAlign: "center"}}>Welcome to Artizt Calendar</Text>
     <Text style={{textAlign: "center"}}>Tab on the Add Task button to add your task</Text>
     </View>
-    <TouchableOpacity onPress = {() => this.props.navigation.navigate('TaskForm')} 
+    <TouchableOpacity activeOpacity={0.9} onPress = {() => this.props.navigation.navigate('TaskForm')} 
     style={{alignContent: "center", justifyContent: "center", display:'flex'}}>
                 <View style = {{backgroundColor: 'purple', paddingTop: 20,paddingBottom:20, paddingLeft: '20%', paddingRight: '20%', margin: 20}}
                        >

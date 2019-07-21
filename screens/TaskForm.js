@@ -93,9 +93,9 @@ else {
           </TouchableOpacity>
            </View>
       <View style={{display: "flex", flexDirection: "row", color:'red'}}>
-                {this.state.tab1 && !this.state.tab2 && !this.state.tab3 ? <Text>Tab 1</Text> : null}
-                {this.state.tab2 && !this.state.tab1 && !this.state.tab3 ? <Text>Tab 2</Text> : null}
-                {this.state.tab3 && !this.state.tab2 && !this.state.tab1 ? <Text>Tab 3</Text> : null}
+                {this.state.tab1 && !this.state.tab2 && !this.state.tab3 ? <EventInfoGrid status="upcoming"></EventInfoGrid>: null}
+                {this.state.tab2 && !this.state.tab1 && !this.state.tab3 ? <EventInfoGrid status="paymentPending"></EventInfoGrid> : null}
+                {this.state.tab3 && !this.state.tab2 && !this.state.tab1 ? <EventInfoGrid status="completed"></EventInfoGrid>: null}
             </View>
     </View>
     )

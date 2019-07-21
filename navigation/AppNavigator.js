@@ -19,11 +19,15 @@ const AppNavigator = createStackNavigator(
       }
     }, 
     TaskForm : {
-      screen: TaskForm
+      screen: TaskForm,
+      //  navigationOptions: {
+      //   header: <CustomHeader/>
+     
+      // }
     }
   },
   {
-    initialRouteName: "AddTask"
+    initialRouteName: "Login"
   }
   
 );
