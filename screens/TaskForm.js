@@ -4,10 +4,9 @@ import {
   View,
   Dimensions,
   StyleSheet, 
-  Button,
   StatusBar, Platform, 
   ImageBackground, 
-  TouchableOpacity
+  TouchableOpacity, ScrollView
 } from 'react-native';
 import EventInfoGrid from '../components/EventInfoGrid';
 
@@ -58,45 +57,51 @@ else {
 
   render() {
     return (
-      <View style={{margin: 10}}>
+      <View style={{marginLeft: 10, marginRight: 10}}>
         <View style={{display: 'flex', flexDirection: 'row', justifyContent: "center"}}>
-      <TouchableOpacity style={{backgroundColor:'purple', padding:5, borderRadius:5, width:'33.33%'}} 
-      onPress= {()=> this.updateTab('tab1')}>
+      <TouchableOpacity style={this.state.tab1 ? styles.tabStyleActive : styles.tabStyle} 
+      onPress= {()=> this.updateTab('tab1')} activeOpacity={0.8}>
         <View>
-          <ImageBackground source={require('../assets/images/events.png')} style={{width: 30, height: 30, zIndex: -1}}>
-
+          <ImageBackground 
+          source={this.state.tab1 ? require('../assets/images/events.png') : require('../assets/images/events-.png')}
+           style={this.state.tab1 ? styles.imageCircleActive : styles.imageCircle}>
           </ImageBackground>
-          <Text style={{color: 'white', fontSize: 12}}> Upcoming Events</Text>
-          <Text style={{color: 'white', fontSize: 10}}> 15 Events</Text>
+          <Text style={this.state.tab1 ? {color: '#f8f2ff', fontSize: 12} : {color: '#541fa1', fontSize: 12}}> Upcoming Events</Text>
+          <Text  style={this.state.tab1 ? {color: '#f8f2ff', fontSize: 10} : {color: '#541fa1', fontSize: 10}}> 15 Events</Text>
           </View>
           </TouchableOpacity>
           <TouchableOpacity 
-          style={{backgroundColor:'pink', padding:5, borderRadius:5, width:'33.33%', marginLeft: 5, marginRight: 5}} 
-      onPress= {()=> this.updateTab('tab2')}>
-        <View>
-          <ImageBackground source={require('../assets/images/events.png')} style={{width: 30, height: 30, zIndex: -1}}>
+         style={this.state.tab2 ? [styles.tabStyleActive, styles.tabSpacer] : [styles.tabStyle, styles.tabSpacer]} 
+      onPress= {()=> this.updateTab('tab2')} activeOpacity={0.8}>
+        <View style={{color: 'red'}}>
+          <ImageBackground 
+          source={this.state.tab2 ? require('../assets/images/payments.png') : require('../assets/images/payment.png')} style={this.state.tab2 ? styles.imageCircleActive : styles.imageCircle}>
 
           </ImageBackground>
-          <Text style={{color: 'white', fontSize: 12}}> Upcoming Events</Text>
-          <Text style={{color: 'white', fontSize: 10}}> 15 Events</Text>
+          <Text  style={this.state.tab2 ? {color: '#f8f2ff', fontSize: 12} : {color: '#541fa1', fontSize: 12}}> Pending Payments</Text>
+          <Text  style={this.state.tab2 ? {color: '#f8f2ff', fontSize: 10} : {color: '#541fa1', fontSize: 10}}> 15 Events</Text>
           </View>
           </TouchableOpacity>
-          <TouchableOpacity style={{backgroundColor:'pink', padding:5, borderRadius:5, width:'33.33%'}} 
-      onPress= {()=> this.updateTab('tab3')}>
+          <TouchableOpacity style={this.state.tab3 ? styles.tabStyleActive : styles.tabStyle} 
+      onPress= {()=> this.updateTab('tab3')} activeOpacity={0.8}>
         <View>
-          <ImageBackground source={require('../assets/images/events.png')} style={{width: 30, height: 30, zIndex: -1}}>
+          <ImageBackground 
+          source={this.state.tab3 ? require('../assets/images/payments.png') : require('../assets/images/payment.png')}
+          style={this.state.tab3 ? styles.imageCircleActive : styles.imageCircle}>
 
           </ImageBackground>
-          <Text style={{color: 'white', fontSize: 12}}> Upcoming Events</Text>
-          <Text style={{color: 'white', fontSize: 10}}> 15 Events</Text>
+          <Text  style={this.state.tab3 ? {color: '#f8f2ff', fontSize: 12} : {color: '#541fa1', fontSize: 12}}> Completed Events</Text>
+          <Text  style={this.state.tab3 ? {color: '#f8f2ff', fontSize: 12} : {color: '#541fa1', fontSize: 10}}> 15 Events</Text>
           </View>
           </TouchableOpacity>
            </View>
-      <View style={{display: "flex", flexDirection: "row", color:'red'}}>
-                {this.state.tab1 && !this.state.tab2 && !this.state.tab3 ? <EventInfoGrid status="upcoming"></EventInfoGrid>: null}
+           <ScrollView>
+      <View style={{display: "flex", flexDirection: "row"}}>
+                {this.state.tab1 && !this.state.tab2 && !this.state.tab3 ? <View><EventInfoGrid status="upcoming"></EventInfoGrid><EventInfoGrid status="upcoming"></EventInfoGrid></View>: null}
                 {this.state.tab2 && !this.state.tab1 && !this.state.tab3 ? <EventInfoGrid status="paymentPending"></EventInfoGrid> : null}
                 {this.state.tab3 && !this.state.tab2 && !this.state.tab1 ? <EventInfoGrid status="completed"></EventInfoGrid>: null}
             </View>
+            </ScrollView>
     </View>
     )
 }
@@ -107,6 +112,35 @@ const styles = StyleSheet.create({
   marginTop: 20,
   marginBottom: 20,
   textAlign: "center"
+ }, 
+ imageCircle : {
+   width: 30, 
+   borderRadius: 20, 
+   height: 30, zIndex: -1,
+   backgroundColor: '#541fa1'
+ }, 
+ imageCircleActive :{
+  width: 30, 
+  borderRadius: 20, 
+  height: 30, zIndex: -1,
+  backgroundColor: '#f8f2ff'
+ }, 
+ tabStyle: {
+   padding: 5,
+   borderRadius: 5, 
+   width: '33.33%',
+   backgroundColor: '#f8f2ff'
+ }, 
+ tabStyleActive : {
+  padding: 5,
+  borderRadius: 5, 
+  width: '33.33%',
+  backgroundColor: '#541fa1'
+ }, 
+ tabSpacer : {
+   marginLeft: 5,
+   marginRight: 5
  }
+
 });
 

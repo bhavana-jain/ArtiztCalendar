@@ -3,6 +3,7 @@ import { createStackNavigator, createAppContainer } from 'react-navigation';
 import Login from '../screens/Login';
 import AddTask from '../screens/AddTask';
 import TaskForm from '../screens/TaskForm';
+import  CustomHeader from '../components/Header.js'
 
 const AppNavigator = createStackNavigator(
   {
@@ -20,11 +21,11 @@ const AppNavigator = createStackNavigator(
     }, 
     TaskForm : {
       screen: TaskForm,
-      //  navigationOptions: {
-      //   header: <CustomHeader/>
+        navigationOptions: {
+         header: <CustomHeader/>
      
-      // }
-    }
+     }
+    } 
   },
   {
     initialRouteName: "Login"

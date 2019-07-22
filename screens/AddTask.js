@@ -26,7 +26,7 @@ export default class AddTask extends Component {
   render() {
     return (
      
-        <View style={{height: layout.height}}>
+        <View style={{height: layout.height, backgroundColor:'#f2f8ff'}}>
 <CalenderBg></CalenderBg>
 <View style={{position:"absolute",height: layout.height, width: layout.width}}>
 <ImageBackground source={require('../assets/images/bg-share-image.png')} 
