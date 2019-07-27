@@ -4,6 +4,13 @@
     "slug": "artistMgmt",
     "privacy": "public",
     "sdkVersion": "33.0.0",
+    "ios": {
+      "supportsTablet": true, 
+      "bundleIdentifier": "com.company.artistmgmt"
+    },
+    "android" : {
+      "package": "com.company.artistmgmt"
+    },
     "platforms": [
       "ios",
       "android",
@@ -11,11 +18,11 @@
     ],
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/images/calender-img.png",
+    "icon": "./assets/images/icon.png",
     "splash": {
       "image": "./assets/images/splash.png",
       "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "backgroundColor": "#f8f2ff"
     },
     "updates": {
       "fallbackToCacheTimeout": 0
@@ -23,9 +30,6 @@
     "assetBundlePatterns": [
       "**/*"
     ],
-    "ios": {
-      "supportsTablet": true
-    },
     "description": "App to handle task management"
   }
 }

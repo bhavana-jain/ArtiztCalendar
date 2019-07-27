@@ -95,13 +95,15 @@ else {
           </View>
           </TouchableOpacity>
            </View>
-           <ScrollView>
+           <ScrollView contentContainerStyle={{}}>
       <View style={{display: "flex", flexDirection: "row"}}>
                 {this.state.tab1 && !this.state.tab2 && !this.state.tab3 ? <View><EventInfoGrid status="upcoming"></EventInfoGrid><EventInfoGrid status="upcoming"></EventInfoGrid></View>: null}
                 {this.state.tab2 && !this.state.tab1 && !this.state.tab3 ? <EventInfoGrid status="paymentPending"></EventInfoGrid> : null}
                 {this.state.tab3 && !this.state.tab2 && !this.state.tab1 ? <EventInfoGrid status="completed"></EventInfoGrid>: null}
             </View>
             </ScrollView>
+            <TouchableOpacity style={{backgroundColor:'#f2f8ff', padding: 15, marginTop: 5}}>
+              <Text style={{textAlign: 'center', color: '#541fa1'}}> Add New Event </Text></TouchableOpacity>
     </View>
     )
 }

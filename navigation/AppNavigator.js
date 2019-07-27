@@ -3,7 +3,8 @@ import { createStackNavigator, createAppContainer } from 'react-navigation';
 import Login from '../screens/Login';
 import AddTask from '../screens/AddTask';
 import TaskForm from '../screens/TaskForm';
-import  CustomHeader from '../components/Header.js'
+import  CustomHeader from '../components/Header.js'; 
+import AddEventForm from '../screens/AddEvent.js'
 
 const AppNavigator = createStackNavigator(
   {
@@ -25,10 +26,16 @@ const AppNavigator = createStackNavigator(
          header: <CustomHeader/>
      
      }
+    },
+    AddEvent: {
+      screen: AddEventForm, 
+      navigationOptions: {
+
+      }
     } 
   },
   {
-    initialRouteName: "Login"
+    initialRouteName: "AddEvent"
   }
   
 );
