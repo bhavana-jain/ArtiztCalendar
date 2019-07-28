@@ -1,37 +1,67 @@
 import React from 'react';
-import { createStackNavigator, createAppContainer } from 'react-navigation';
+import { createStackNavigator, createAppContainer, createDrawerNavigator, navigation } from 'react-navigation';
 import Login from '../screens/Login';
 import AddTask from '../screens/AddTask';
 import TaskForm from '../screens/TaskForm';
 import  CustomHeader from '../components/Header.js'; 
 import AddEventForm from '../screens/AddEvent.js'
 
-const AppNavigator = createStackNavigator(
+// Stack navigation with header customization
+const LoginScreen = createStackNavigator(
   {
-    Login: {
-      screen: Login, 
-      navigationOptions: {
-        header: null,
-      }
-    },
-    AddTask : {
-      screen: AddTask, 
-      navigationOptions: {
-        header: null,
+    MainScreen: {
+      screen: Login,
+      navigationOptions : {
+        header: null
       }
     }, 
-    TaskForm : {
+  }
+);
+const createEventSplash = createStackNavigator(
+  {
+    MainScreen: {
+      screen: AddTask,
+      navigationOptions : {
+        header: null
+      }
+    }, 
+  }
+);
+const EventInfoList = createStackNavigator(
+  {
+    MainScreen: {
       screen: TaskForm,
-        navigationOptions: {
-         header: <CustomHeader/>
-     
-     }
+      navigationOptions : {
+        header: <CustomHeader/>
+      }
+    }, 
+  }
+);
+const AddNewEvent = createStackNavigator(
+  { 
+    MainScreen: {
+      screen: AddEventForm,
+      navigationOptions : {
+        //header: <CustomHeader navigate={navigation.navigate} //>
+      }
+    }, 
+  }
+);
+
+// Drawer navigation 
+const AppNavigator = createDrawerNavigator(
+  {
+    Login: {
+      screen: LoginScreen
+    },
+    AddTask : {
+      screen: createEventSplash
+    }, 
+    TaskForm : {
+      screen: EventInfoList
     },
     AddEvent: {
-      screen: AddEventForm, 
-      navigationOptions: {
-
-      }
+      screen: AddNewEvent
     } 
   },
   {
@@ -39,25 +69,5 @@ const AppNavigator = createStackNavigator(
   }
   
 );
-AppNavigator.navigationOptions = {
-  tabBarLabel: 'Calls',
-  tabBarIcon: ({ focused }) => (
-    <TabBarIcon
-      focused={focused}
-      name={Platform.OS === 'ios' ? 'ios-options' : 'md-options'}
-    />
-  ),
-
-   header: null,
-
-        headerVisible: false,
-
-};
-
-
-
-
 const App = createAppContainer(AppNavigator)
-
-
- export default App;
+export default App;

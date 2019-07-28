@@ -10,7 +10,9 @@ import {
 import t from 'tcomb-form-native';
 import moment from 'moment'; // For formating date and time
 import { TouchableOpacity } from 'react-native-gesture-handler';
+import createStackNavigator from 'react-navigation';
 var _ = require('lodash');
+const dimension = Dimensions.get('screen');
 
 
 const stylesheet = _.cloneDeep(t.form.Form.stylesheet);
@@ -195,7 +197,11 @@ const Form = t.form.Form;
 
 
 export default class AddEventForm extends Component {
- 
+  static navigationOptions = {
+    drawerLabel: 'Add New Event', 
+    
+  }
+
 constructor(props){
   super(props)
   this.state = {

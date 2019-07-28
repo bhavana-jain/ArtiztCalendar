@@ -10,7 +10,7 @@ import {
   Picker
 } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
-import DrawerNavigator, { createDrawerNavigator } from 'react-navigation';
+import { createDrawerNavigator, withNavigation, navigation } from 'react-navigation';
 import Login from '../screens/Login';
 import AddTask from '../screens/AddTask';
 import TaskForm from '../screens/TaskForm';
@@ -26,7 +26,7 @@ const STATUSBAR_HEIGHT = Platform.OS === 'ios' ? 20 : StatusBar.currentHeight;
      AddTask: AddTask
    }
  )
-export default class CustomHeader extends Component {
+ class CustomHeader extends Component {
  
   constructor(props) {
     super(props);
@@ -44,12 +44,13 @@ month : "may"
     
      <View style={{marginTop: STATUSBAR_HEIGHT, paddingLeft: 10, paddingRight: 10, paddingTop: 5, paddingBottom: 5, display: 'flex', flexDirection: 'row'}}>
        <View style={{width: '50%', display: 'flex', flexDirection: 'row', alignItems: 'center'}}>
-      <TouchableOpacity activeOpacity={0.9} onPress ={ () => alert('me')}>
+      <TouchableOpacity activeOpacity={0.9} onPress ={ () => {this.props.navigation.openDrawer();
+}}>
       <ImageBackground source={require('../assets/images/list-menu.png')} style={{width: 20, height: 20}}>
         </ImageBackground>
       </TouchableOpacity>
         <View>
-        { <Picker selectedValue = {this.state.month} onValueChange = {this.updateMonth} style={{width: 150, justifyContent: 'flex-end'}}>
+        { <Picker selectedValue = {this.state.month} onValueChange = {this.updateMonth} style={{width: 200, justifyContent: 'flex-end'}}>
                <Picker.Item label = "January 2019" value = "January 2019" />
                <Picker.Item label = "February 2019" value = "February 2019" />
                <Picker.Item label = "March 2019" value = "March 2019" />
@@ -68,7 +69,4 @@ month : "may"
     )
     }
 }
-
-const styles = StyleSheet.create({
- 
-});
+export default withNavigation(CustomHeader);
