@@ -52,16 +52,28 @@ const AddNewEvent = createStackNavigator(
 const AppNavigator = createDrawerNavigator(
   {
     Login: {
-      screen: LoginScreen
+      screen: LoginScreen,
+      navigationOptions: {
+        drawerLabel: "Login"
+      }
     },
     AddTask : {
-      screen: createEventSplash
+      screen: createEventSplash,
+      navigationOptions: {
+        drawerLabel: "Add Task"
+      }
     }, 
     TaskForm : {
-      screen: EventInfoList
+      screen: EventInfoList,
+      navigationOptions: {
+        drawerLabel: "View Events"
+      }
     },
     AddEvent: {
-      screen: AddNewEvent
+      screen: AddNewEvent,
+      navigationOptions: {
+        drawerLabel: "Create Event"
+      }
     } 
   },
   {

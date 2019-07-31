@@ -57,7 +57,7 @@ else {
 
   render() {
     return (
-      <View style={{marginLeft: 10, marginRight: 10}}>
+      <View style={{marginLeft: 10, marginRight: 10, flex: 1}}>
         <View style={{display: 'flex', flexDirection: 'row', justifyContent: "center"}}>
       <TouchableOpacity style={this.state.tab1 ? styles.tabStyleActive : styles.tabStyle} 
       onPress= {()=> this.updateTab('tab1')} activeOpacity={0.8}>

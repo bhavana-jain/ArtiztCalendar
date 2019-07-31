@@ -50,8 +50,8 @@ export default class EventInfoGrid extends Component {
  
   render() {
     return (
-<View style={{flex: 1}}>
-  <ScrollView style={{flexBasis: 1}}>
+<View>
+  <ScrollView style={{flexGrow: 1}}>
         <View style={{display: 'flex', flexDirection: 'row', marginTop: 10}}>
         <View style={{width: '20%', backgroundColor: 'white', lineHeight: 0, alignContent: "center", justifyContent: "center", alignItems: "center"}}>
             <Text style={{fontWeight: "bold"}}>20</Text>

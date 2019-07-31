@@ -5,12 +5,13 @@ import {
   Dimensions,
   StyleSheet, 
   Button,
-  ScrollView, KeyboardAvoidingView
+  ScrollView, Keyboard
 } from 'react-native';
 import t from 'tcomb-form-native';
 import moment from 'moment'; // For formating date and time
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import createStackNavigator from 'react-navigation';
+import { form } from 'tcomb-form-native/lib';
 var _ = require('lodash');
 const dimension = Dimensions.get('screen');
 
@@ -194,48 +195,69 @@ const options = {
 
 
 const Form = t.form.Form;
-
+let formHeightStyle = Dimensions.get('window').height -120
 
 export default class AddEventForm extends Component {
-  static navigationOptions = {
-    drawerLabel: 'Add New Event', 
-    
-  }
-
 constructor(props){
   super(props)
   this.state = {
-      height: Dimensions.get('window').height
+      height: Dimensions.get('window').height, 
+      keypad: false
   }
-} 
+  
+}
 
+componentDidMount() {
+  this.keyboardDidShowListener = Keyboard.addListener(
+    'keyboardDidShow',this._keyboardDidShow,
+  );
+  this.keyboardDidHideListener = Keyboard.addListener(
+    'keyboardDidHide',this._keyboardDidHide,
+  );
+  this.setState({formHeight: Dimensions.get('window').height - 120})
+}
+
+componentWillUnmount() {
+  this.keyboardDidShowListener.remove();
+  this.keyboardDidHideListener.remove();
+}
+
+_keyboardDidShow = (e) => {
+  setTimeout(()=> 
+  this.setState({  keypad: true}), 0)
+ formHeightStyle = e.endCoordinates.height + 20;
+ this.refs.formScroll.height = formHeightStyle;
+}
+
+_keyboardDidHide = (e) => {
+ this.setState({  keypad : false})
+} 
 
 onPress = () =>    {
   // call getValue() to get the values of the form
   var value = this.refs.form.getValue();
   if (value) { // if validation fails, value will be null
-    alert(value.startTime ); // value here is an instance of Person
+    alert(JSON.stringify(value) ); // value here is an instance of Person
   }
 }
-
-
-
   render() {
     
     return (
-      <KeyboardAvoidingView behavior="height" style={{flex: 1}}>
       <View style={{flex: 1}}>
-        
-        <ScrollView style={{flex: 1, paddingBottom: 20}}>
+       <View ref="formScroll" 
+       style={this.state.keypad ? {height: formHeightStyle }: formStyles.keypadHidden}
+       >
+        <ScrollView>
         <Form type={Event} options={options} value={this.state.value} ref="form"
  />   
         </ScrollView>
-        <TouchableOpacity activeOpacity={0.9} style={{flex: 1, justifyContent: 'center', backgroundColor: '#f2f8ff', padding: 10, marginLeft: 10, marginRight: 10}} onPress={this.onPress} > 
+        </View> 
+        <TouchableOpacity 
+         activeOpacity={0.9} style={{justifyContent: 'center', backgroundColor: '#f2f8ff', padding: 10, marginLeft: 10, marginRight: 10}} onPress={this.onPress} > 
         <Text style={{color:'#541fa1', textAlign: 'center'}}> Add Event </Text>
         </TouchableOpacity>
-      </View>
-
-</KeyboardAvoidingView>
+       
+        </View>
     );
   }
 }
@@ -248,6 +270,12 @@ const formStyles = StyleSheet.create({
     flex: 1,
     paddingLeft: 15
   }, 
+  keypadVisible : {
+    backgroundColor: 'red'
+  },
+  keypadHidden: {
+    height: Dimensions.get('window').height - 120
+  },
   selectOptions : {
     flex: 1, 
     paddingRight: 15, 
