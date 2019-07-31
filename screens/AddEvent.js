@@ -3,17 +3,13 @@ import {
   Text,
   View,
   Dimensions,
-  StyleSheet, 
-  Button,
+  StyleSheet,
   ScrollView, Keyboard
 } from 'react-native';
 import t from 'tcomb-form-native';
 import moment from 'moment'; // For formating date and time
 import { TouchableOpacity } from 'react-native-gesture-handler';
-import createStackNavigator from 'react-navigation';
-import { form } from 'tcomb-form-native/lib';
 var _ = require('lodash');
-const dimension = Dimensions.get('screen');
 
 
 const stylesheet = _.cloneDeep(t.form.Form.stylesheet);
@@ -41,10 +37,6 @@ stylesheet.textbox.normal.borderBottomColor= '#cccccc';
 stylesheet.select.normal.marginLeft =  0;
 stylesheet.select.normal.paddingLeft =  0;
 stylesheet.dateValue.normal.paddingLeft = 0;
-
-
-
-
 
 var eventType = t.enums({
   B: 'Birthday',
@@ -169,6 +161,10 @@ const options = {
         defaultValueText: "Thursday, 25 July"
       }
     },
+    setReminder: {
+      label:' ',
+      auto: 'none'
+    },
     mgrName: {
       label: "Event Manager's Name", 
       placeholder: "Adam"
@@ -192,8 +188,6 @@ const options = {
   stylesheet: stylesheet,
   template: template
 };
-
-
 const Form = t.form.Form;
 let formHeightStyle = Dimensions.get('window').height -120
 
@@ -253,7 +247,7 @@ onPress = () =>    {
         </ScrollView>
         </View> 
         <TouchableOpacity 
-         activeOpacity={0.9} style={{justifyContent: 'center', backgroundColor: '#f2f8ff', padding: 10, marginLeft: 10, marginRight: 10}} onPress={this.onPress} > 
+         activeOpacity={0.9} style={{height: 50, justifyContent: 'center', backgroundColor: '#f2f8ff', padding: 10, marginLeft: 10, marginRight: 10}} onPress={this.onPress} > 
         <Text style={{color:'#541fa1', textAlign: 'center'}}> Add Event </Text>
         </TouchableOpacity>
        

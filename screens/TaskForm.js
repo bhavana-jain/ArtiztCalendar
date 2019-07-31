@@ -102,7 +102,7 @@ else {
                 {this.state.tab3 && !this.state.tab2 && !this.state.tab1 ? <EventInfoGrid status="completed"></EventInfoGrid>: null}
             </View>
             </ScrollView>
-            <TouchableOpacity style={{backgroundColor:'#f2f8ff', padding: 15, marginTop: 5}}>
+            <TouchableOpacity style={{backgroundColor:'#f2f8ff', padding: 15, marginTop: 5}} onPress={() => this.props.navigation.navigate('AddEvent')}>
               <Text style={{textAlign: 'center', color: '#541fa1'}}> Add New Event </Text></TouchableOpacity>
     </View>
     )

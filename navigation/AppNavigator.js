@@ -3,8 +3,9 @@ import { createStackNavigator, createAppContainer, createDrawerNavigator, naviga
 import Login from '../screens/Login';
 import AddTask from '../screens/AddTask';
 import TaskForm from '../screens/TaskForm';
-import  CustomHeader from '../components/Header.js'; 
-import AddEventForm from '../screens/AddEvent.js'
+import  CustomHeader from '../components/Header.js';
+import FormHeader from '../components/formHeader.js';
+import AddEventForm from '../screens/AddEvent.js';
 
 // Stack navigation with header customization
 const LoginScreen = createStackNavigator(
@@ -42,7 +43,7 @@ const AddNewEvent = createStackNavigator(
     MainScreen: {
       screen: AddEventForm,
       navigationOptions : {
-        //header: <CustomHeader navigate={navigation.navigate} //>
+       header: <FormHeader/>
       }
     }, 
   }
