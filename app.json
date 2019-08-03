@@ -5,10 +5,10 @@
     "privacy": "public",
     "sdkVersion": "33.0.0",
     "ios": {
-      "supportsTablet": true, 
+      "supportsTablet": true,
       "bundleIdentifier": "com.company.artistmgmt"
     },
-    "android" : {
+    "android": {
       "package": "com.company.artistmgmt"
     },
     "platforms": [

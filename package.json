@@ -27,6 +27,7 @@
     "react-native": "https://github.com/expo/react-native/archive/sdk-33.0.0.tar.gz",
     "react-native-datepicker": "^1.7.2",
     "react-native-easy-grid": "^0.2.1",
+    "react-native-google-signin": "^2.0.0",
     "react-native-keyboard-aware-scroll-view": "^0.8.0",
     "react-native-linear-gradient": "^2.5.4",
     "react-native-looped-carousel": "^0.1.13",

@@ -5,19 +5,21 @@ import AddTask from '../screens/AddTask';
 import TaskForm from '../screens/TaskForm';
 import  CustomHeader from '../components/Header.js';
 import FormHeader from '../components/formHeader.js';
+import LoginCarousel from '../screens/LoginCarousel.js';
 import AddEventForm from '../screens/AddEvent.js';
 
 // Stack navigation with header customization
 const LoginScreen = createStackNavigator(
   {
     MainScreen: {
-      screen: Login,
+      screen: LoginCarousel,
       navigationOptions : {
         header: null
       }
     }, 
   }
 );
+
 const createEventSplash = createStackNavigator(
   {
     MainScreen: {
@@ -78,7 +80,7 @@ const AppNavigator = createDrawerNavigator(
     } 
   },
   {
-    initialRouteName: "AddEvent"
+    initialRouteName: "Login"
   }
   
 );
