@@ -8,7 +8,8 @@ import {
 } from 'react-native';
 import t from 'tcomb-form-native';
 import moment from 'moment'; // For formating date and time
-import { TouchableOpacity } from 'react-native-gesture-handler';
+import { TouchableOpacity, TextInput } from 'react-native-gesture-handler';
+import TestPicker from '../components/datetime'
 var _ = require('lodash');
 
 
@@ -60,17 +61,16 @@ const Event = t.struct({
     dressCode: t.String,
    comments: t.String
 });
-
 function template(locals) {
+  
   // in locals.inputs you find all the rendered fields
   return (
     <View style={{padding: 10}}>
       <View style={{flexDirection: 'row'}}>
-        <View style={formStyles.rightSpacer}>
-          {locals.inputs.eventStart}
+        <View style={formStyles.rightSpacer}>{locals.inputs.eventStart}
         </View>
         <View style={formStyles.leftSpacer}>
-          {locals.inputs.startTime}
+         {locals.inputs.startTime}
         </View>
       </View>
       <View style={{flexDirection: 'row'}}>
@@ -88,9 +88,9 @@ function template(locals) {
           {locals.inputs.eventQuote}
         </View>
       </View>
-      <View style={{flexDirection: 'row'}}>
+      <View style={{flexDirection: 'row' }}>
         <View style={{flex: 1}}>{locals.inputs.reminder}</View>
-        <View>{locals.inputs.setReminder}</View>
+        <View style={{marginTop: -20}}>{locals.inputs.setReminder}</View>
       </View>
       <View style={{flexDirection: 'row'}}>
         <View style={[formStyles.rightSpacer]}>{locals.inputs.mgrName}</View>
@@ -116,9 +116,9 @@ const options = {
       label: 'Event Start',
       mode: 'date',
       config: {
-        format: (date) => moment(date).format('dddd, MMMM YYYY'),
-        dateFormat: date => moment(date).format('dddd, MMMM YYYY'),
-        defaultValueText: "Thursday, 25 July"
+        format: (date) => moment(date).format('dddd, MMMM D, YYYY'),
+        dateFormat: date => moment(date).format('dddd, MMMM dd YYYY'),
+        defaultValueText: "Thursday, 25 July 2019"
       },
       
       
@@ -129,14 +129,16 @@ const options = {
       config: {
         format: date => moment(date).format('h:mm a'),
         timeFormat: date => moment(date).format('h:mm a'),
+        defaultValueText: "5:30 pm"
       }
     }, 
     eventEnd: {
-      label:'Event End',
+      label:'Event End',  
       mode: 'date',
       config: {
-        format: date => moment(date).format('dddd, MMMM YYYY'),
-        dateFormat: date => moment(date).format('dddd, MMMM YYYY')
+        format: date => moment(date).format('dddd, MMMM D YYYY'),
+        dateFormat: date => moment(date).format('dddd, MMMM D YYYY'),
+        defaultValueText: "Thursday, 25 July 2019"
       },
 
     },
@@ -146,6 +148,7 @@ const options = {
       config: {
         format: date => moment(date).format('h:mm a'),
         timeFormat: date => moment(date).format('h:mm a'),
+        defaultValueText: "5:30 Pm"
       },
 
     },
@@ -154,12 +157,13 @@ const options = {
     },
     reminder : {
       label: "Notifications",
-      mode: 'datetime', 
-      config : {
-        format: date => moment(date).format('dddd, MMMM YYYY, h:mm a'),
-        dateFormat: date => moment(date).format('dddd, MMMM YYYY, h:mm a'),
-        defaultValueText: "Thursday, 25 July"
-      }
+      factory: TestPicker
+     //  mode: 'datetime', 
+      // config : {
+      //   format: date => moment(date).format('dddd, MMMM YYYY, h:mm a'),
+      //   dateFormat: date => moment(date).format('dddd, MMMM YYYY, h:mm a'),
+      //   defaultValueText: "Thursday, 25 July"
+      // }
     },
     setReminder: {
       label:' ',
@@ -187,7 +191,7 @@ const options = {
   },
   stylesheet: stylesheet,
   template: template
-};
+};  
 const Form = t.form.Form;
 let formHeightStyle = Dimensions.get('window').height -120
 
@@ -197,7 +201,10 @@ constructor(props){
   this.state = {
       height: Dimensions.get('window').height, 
       keypad: false
+
   }
+  this.onPress = this.onPress.bind(this);
+ 
   
 }
 
@@ -227,12 +234,8 @@ _keyboardDidHide = (e) => {
  this.setState({  keypad : false})
 } 
 
-onPress = () =>    {
-  // call getValue() to get the values of the form
-  var value = this.refs.form.getValue();
-  if (value) { // if validation fails, value will be null
-    alert(JSON.stringify(value) ); // value here is an instance of Person
-  }
+onPress(){
+
 }
   render() {
     
@@ -242,7 +245,7 @@ onPress = () =>    {
        style={this.state.keypad ? {height: formHeightStyle }: formStyles.keypadHidden}
        >
         <ScrollView>
-        <Form type={Event} options={options} value={this.state.value} ref="form"
+        <Form type={Event} options={options} value={this.state.value} ref={(ref) => this._formRef=ref}
  />   
         </ScrollView>
         </View> 
@@ -258,7 +261,7 @@ onPress = () =>    {
 const formStyles = StyleSheet.create({
   rightSpacer: {
     flex: 1,
-    paddingRight: 15
+    paddingRight: 15,
   },
   leftSpacer: {
     flex: 1,
@@ -275,7 +278,7 @@ const formStyles = StyleSheet.create({
     paddingRight: 15, 
     borderBottomColor: '#cccccc',
     borderBottomWidth: 1, 
-    height: 56,
+    height: 54,
     marginBottom: 10
   }
 });

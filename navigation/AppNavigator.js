@@ -80,7 +80,7 @@ const AppNavigator = createDrawerNavigator(
     } 
   },
   {
-    initialRouteName: "Login"
+    initialRouteName: "AddEvent"
   }
   
 );
