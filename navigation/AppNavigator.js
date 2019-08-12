@@ -57,7 +57,9 @@ const AppNavigator = createDrawerNavigator(
     Login: {
       screen: LoginScreen,
       navigationOptions: {
-        drawerLabel: "Login"
+        drawerLabel: "Login",
+        drawerLockMode: 'locked-closed',
+      disableGestures: true 
       }
     },
     AddTask : {
@@ -77,11 +79,28 @@ const AppNavigator = createDrawerNavigator(
       navigationOptions: {
         drawerLabel: "Create Event"
       }
+    },
+    Settings: {
+      screen: AddNewEvent, // To be updated
+      navigationOptions: {
+        drawerLabel: "Settings"
+      }
+    },
+    Logout: {
+      screen: AddNewEvent, // To be updated
+      navigationOptions: {
+        drawerLabel: "Logout"
+      }
     } 
   },
   {
-    initialRouteName: "AddEvent"
+    initialRouteName: "Login",
+    navigationOptions: {
+      drawerLockMode: 'locked-closed',
+      disableGestures: true 
+    }
   }
+  
   
 );
 const App = createAppContainer(AppNavigator)

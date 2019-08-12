@@ -237,7 +237,7 @@ _keyboardDidHide = (e) => {
 onPress(){
 
 }
-  render() {
+  render() {  
     
     return (
       <View style={{flex: 1}}>
